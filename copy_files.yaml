@@ -3,7 +3,7 @@
     tasks: 
       - name: copy files
         copy:
-          scr: /tmp/test
+          src: /tmp/test
           dest: /tmp/somefile
         become: yes
         become_method: sudo

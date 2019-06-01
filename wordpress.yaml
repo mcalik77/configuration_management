@@ -3,8 +3,6 @@
     hosts: web
     become: yes
     become_method: sudo
-    gather_facts: no
-    connection: ssh
     tasks:
       - name: copy repel repository
         shell: "wget -q http://rpms.remirepo.net/enterprise/remi-release-7.rpm"

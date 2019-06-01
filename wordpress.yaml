@@ -14,7 +14,7 @@
           - wget 
           - php-gd
           - unzip 
-          - httpd 
+          - htpd 
           - mysql 
           - mariadb-server 
           - php 

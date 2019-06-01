@@ -6,6 +6,14 @@
     gather_facts: no
     connection: ssh
     tasks:
+      - name: copy repel repository
+        shell: "wget -q http://rpms.remirepo.net/enterprise/remi-release-7.rpm"
+        shell: "rpm -i remi-release-7.rpm epel-release-7.rpm"
+        shell: "yum-config-manager --enable remi-php70"
+        become: yes
+        become_method: sudo
+        ignore_errors: yes
+      
       - name: Install necessary packages
         package:
           name: "{{item}}"

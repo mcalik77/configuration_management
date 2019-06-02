@@ -1,6 +1,6 @@
 ---
 - name: Helps to download file
-  hosts: alll
+  hosts: localhost
   become: yes
   become_method: sudo
   vars_prompt:
@@ -10,5 +10,5 @@
   tasks:
     - name: Download 1 package
       get_url:
-        url: ""
+        url: "{{URL}}"
         dest: /tmp/

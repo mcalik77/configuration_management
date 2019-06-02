@@ -5,7 +5,7 @@
     become_method: sudo
     tasks:
       - name: copy repel repository
-        shell: "yum install epel-release -y"
+        shell: "yum install epel-release  wget -y"
         shell: "wget http://rpms.remirepo.net/enterprise/remi-release-7.rpm"
         shell: "yum install remi-release-7.rpm"
         shell: "yum-config-manager --enable remi-php56"
@@ -18,14 +18,12 @@
           name: "{{item}}"
           state: latest
         with_items:
-          - wget 
-          - php56-gd
           - unzip 
           - httpd 
           - mysql 
           - mariadb-server 
           - php56 
-          - php56-mysqlnd 
+          - php56-php-mysqlnd 
           - php56-fpm 
         ignore_errors: true
 

@@ -12,6 +12,5 @@
         shell: "yum update php mysql php-mysql httpd -y"
         shell: "systemctl restart httpd"
         shell: "systemctl enable httpd"
-        become: yes
-        become_method: sudo
+        
         

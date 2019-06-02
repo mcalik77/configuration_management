@@ -4,7 +4,7 @@
   tasks: 
     - name: Create instances
       ec2:
-        key_name: myMacKey
+        key_name: awxTowerkey
         instance_type: t2.micro
         image: ami-04768381bf606e2b3
         count: 3

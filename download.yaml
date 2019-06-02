@@ -1,8 +1,5 @@
 ---
 - name: Helps to download file
-  hosts: localhost
-  become: yes
-  become_method: sudo
   vars_prompt:
     - name: URL
       promt: "Give me the url:"
@@ -10,6 +7,13 @@
     - name: DESTINATION
       promt: "Give me the location to put:"
       private: no
+    - name: HOST
+      promt: "Which host:"
+      private: no
+  hosts: "{{HOST}}"
+  become: yes
+  become_method: sudo
+  
   tasks:
     - name: Download 1 package
       get_url:

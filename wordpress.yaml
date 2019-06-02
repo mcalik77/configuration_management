@@ -24,7 +24,7 @@
           - mariadb-server 
           - php56 
           - php56-php-mysqlnd 
-          - php56-fpm 
+          
         ignore_errors: true
 
       

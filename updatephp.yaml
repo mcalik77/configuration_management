@@ -1,0 +1,17 @@
+--
+  - name: Installs wordpress
+    hosts: web
+    become: yes
+    become_method: sudo
+    tasks:
+      - name: copy repel repository
+        shell: "yum install epel-release -y"
+        shell: "wget -q http://rpms.remirepo.net/enterprise/remi-release-7.rpm"
+        shell: "yum install remi-release-7.rpm"
+        shell: "yum-config-manager --enable remi-php56"
+        shell: "yum update php mysql php-mysql httpd -y"
+        shell: "systemctl restart httpd"
+        shell: "systemctl enable httpd"
+        become: yes
+        become_method: sudo
+        ignore_errors: yes

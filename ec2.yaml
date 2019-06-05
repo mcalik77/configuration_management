@@ -1,21 +1,16 @@
 # pip install boto 
 ---
 - name: Create ec2 instance 
-  vars_prompt:
-    - name: ID
-      prompt: " Instance ID to create?"
-      private: no
-    - name: REGION
-      prompt: " What region do you want to create?"
-      private: no
   hosts: localhost
+  vars_files:
+    - ec2_vars
   tasks: 
     - name: Create instance
       ec2:
-        key_name: awxTowerkey
-        instance_type: t2.micro
-        image: "{{ID}}"
-        count: 1
-        vpc_subnet_id: subnet-02a1a76a
-        region: "{{REGION}}"
-        
+        key_name: "{{key_name}}"
+        instance_type: "{{instance_type}}"
+        image: "{{image}}"
+        count: "{{count}}"
+        vpc_subnet_id: "{{vpc_subnet_id}}"
+        region: "{{region}}"
+        user_data: "{{lookup('file', 'user_data.sh)}}'"

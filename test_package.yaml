@@ -5,3 +5,5 @@
       package:
         name: "{{package_name}}"
         state: latest
+      become: yes
+      become_method: sudo

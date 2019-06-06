@@ -14,14 +14,23 @@
         package:
           name: serverbackup-enterprise-agent
           state: latest
-      - name: Start agent
-        systemd:
-          name: sbm-agent
-          state: restarted
-
+        notify: R1SOFT_INSTALLED_ON_CENTOS_7
       - name: Get key
         shell: "r1soft-setup --get-key http://r1soft.acirrustech.com"
       when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
+  handlers:
+    - name: R1SOFT_INSTALLED_ON_CENTOS_7
+      systemd:
+        name: sbm-agent
+        state: restarted 
+    - name: R1SOFT_INSTALLED_ON_CENTOS_6
+      service:
+        name: cdp-agent
+        state: restarted 
+    - name: R1SOFT_INSTALLED_ON_CENTOS_8
+      systemd:
+        name: sbm-agent
+        state: restarted 
     # this line for CentOS 6
     - block:
       - name: Creating Repository
@@ -32,6 +41,7 @@
         package:
           name: serverbackup-enterprise-agent
           state: latest
+        notify: R1SOFT_INSTALLED_ON_CENTOS_6
       - name: Start agent
         service:
           name: cdp-agent
@@ -40,6 +50,7 @@
       - name: Get key
         shell: "r1soft-setup --get-key http://r1soft.acirrustech.com"
       when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "6"
+
     # this line for CentOS 8
     - block:
       - name: Creating Repository
@@ -50,6 +61,7 @@
         package:
           name: serverbackup-enterprise-agent
           state: latest
+        notify: R1SOFT_INSTALLED_ON_CENTOS_8
       - name: Start agent
         systemd:
           name: sbm-agent
@@ -58,6 +70,7 @@
       - name: Get key
         shell: "r1soft-setup --get-key http://r1soft.acirrustech.com"
       when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "8"
+    
     # this line for Fedora
     - block:
       - name: Creating Repository

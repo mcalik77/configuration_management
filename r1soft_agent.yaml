@@ -51,8 +51,8 @@
           name: serverbackup-enterprise-agent
           state: latest
       - name: Start agent
-        service:
-          name: cdp-agent
+        systemd:
+          name: sbm-agent
           state: restarted
 
       - name: Get key
@@ -69,8 +69,8 @@
           name: serverbackup-enterprise-agent
           state: latest
       - name: Start agent
-        service:
-          name: cdp-agent
+        systemd:
+          name: sbm-agent
           state: restarted
 
       - name: Get key

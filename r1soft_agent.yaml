@@ -69,6 +69,7 @@
         package:
           name: serverbackup-enterprise-agent
           state: latest
+        notify: R1SOFT_INSTALLED_ON_FEDORA_28
       - name: Start agent
         systemd:
           name: sbm-agent
@@ -88,6 +89,10 @@
           name: cdp-agent
           state: restarted 
       - name: R1SOFT_INSTALLED_ON_CENTOS_8
+        systemd:
+          name: sbm-agent
+          state: restarted 
+      - name: R1SOFT_INSTALLED_ON_FEDORA_28
         systemd:
           name: sbm-agent
           state: restarted 

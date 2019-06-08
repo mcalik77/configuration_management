@@ -73,7 +73,7 @@
 
     handlers: 
       - name: R1SOFT_INSTALLED_ON_CENTOS_6
-        systemd:
+        service:
           name: cdp-agent
           state: restarted
       - name: R1SOFT_INSTALLED_ON_CENTOS_7

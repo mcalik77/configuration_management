@@ -88,11 +88,11 @@
       service:
         name: cdp-agent
         state: restarted 
-    - name: R1SOFT_INSTALLED_ON_CENTOS_8
-      systemd:
-        name: sbm-agent
-        state: restarted 
-    - name: R1SOFT_INSTALLED_ON_FEDORA_28
-      systemd:
-        name: sbm-agent
-        state: restarted 
+    # - name: R1SOFT_INSTALLED_ON_CENTOS_8
+    #   systemd:
+    #     name: sbm-agent
+    #     state: restarted 
+    # - name: R1SOFT_INSTALLED_ON_FEDORA_28
+    #   systemd:
+    #     name: sbm-agent
+    #     state: restarted 

@@ -15,7 +15,7 @@
           package: 
             name: serverbackup-enterprise-agent 
             state: latest 
-          notify: R1SOFT_INSTALLED_ON_CENTOS7
+          notify: R1SOFT_INSTALLED_ON_CENTOS_7
 
         - name: start agent
           systemd: 

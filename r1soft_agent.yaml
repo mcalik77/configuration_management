@@ -1,6 +1,6 @@
 ---
 - name: install r1soft agent
-  hosts: target
+  hosts: 172.31.0.81
   become: yes
   become_method: sudo
   tasks:

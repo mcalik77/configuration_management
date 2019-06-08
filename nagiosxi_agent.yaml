@@ -45,12 +45,12 @@
         line: "community_string = Str0ngT0k3n"
  
   handlers: 
-      - name: NCPA_CENTOS_6
-        service:
-          name: ncpa_listener
-          state: restarted
+    - name: NCPA_CENTOS_6
+      service:
+        name: ncpa_listener
+        state: restarted
 
-      - name: NCPA_CENTOS_7
-        systemd:
-          name: ncpa_listener
-          state: restarted  
+    - name: NCPA_CENTOS_7
+      systemd:
+        name: ncpa_listener
+        state: restarted  

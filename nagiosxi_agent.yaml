@@ -1,50 +1,72 @@
 ---
-- name: Installs NCPA agent on instances
-  hosts: all 
+- name: Installs ncpa agent on instances
+  hosts: all
   become: yes
-  become_user: root
+  become_user: root 
   tasks: 
     - name: Create Repo on Centos6
-      When: ansible_distribution == "CentOS" and ansible_distribution_major_version == "6"
+      when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "6"
       shell: "rpm -Uvh http://repo.nagios.com/nagios/6/nagios-repo-6-3.el6.noarch.rpm"
-
-
-    - name: Install NCPA on centos 6
-      When: ansible_distribution == "CentOS" and ansible_distribution_major_version == "6"
+    
+    - name: Install ncpa on centos 6
+      when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "6"
       package:
         name: ncpa
         state: present
       notify: NCPA_CENTOS_6
-
-
-      # This linefile is going to go into the specified file and make the necessary changes, withou having to go into the file manually.
-    - name: Change the code inside the ncpa.cfg
-      When: ansible_distribution == "CentOS" and ansible_distribution_major_version == "6"
+    
+    - name: Change the code inside ncpa.cfg
+      when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "6" 
       lineinfile:
         path: /usr/local/ncpa/etc/ncpa.cfg
         regexp: "community_string = mytoken"
-        line: "community_string = Str0ngT0k3n"
+        line: "community_string = STRONGPASSWORD"
 
 
-    - name: Create Repo on Cento7
-      When: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
+
+    - name: Create repo on centos 7 
+      when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
       shell: "rpm -Uvh http://repo.nagios.com/nagios/7/nagios-repo-7-3.el7.noarch.rpm"
 
-    - name: Install NCPA on centos 7
-      When: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
+    - name: Install ncpa on centos 7
+      when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
       package:
         name: ncpa
         state: present
       notify: NCPA_CENTOS_7
 
-    - name: Change the code inside the ncpa.cfg
-      When: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
+    - name: Change the code inside ncpa.cfg
+      when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "6" 
       lineinfile:
         path: /usr/local/ncpa/etc/ncpa.cfg
         regexp: "community_string = mytoken"
-        line: "community_string = Str0ngT0k3n"
- 
-  handlers: 
+        line: "community_string = STRONGPASSWORD"
+
+
+
+
+
+
+    - name: Create repo on Amazon
+      when: ansible_distribution == "Amazon"
+      shell: "rpm -Uvh http://repo.nagios.com/nagios/7/nagios-repo-7-3.el7.noarch.rpm"
+
+    - name: Install ncpa on centos 7
+      when: ansible_distribution == "Amazon"
+      package:
+        name: ncpa
+        state: present
+      notify: NCPA_AMAZON
+
+    - name: Change the code inside ncpa.cfg
+      when: ansible_distribution == "Amazon"
+      lineinfile:
+        path: /usr/local/ncpa/etc/ncpa.cfg
+        regexp: "community_string = mytoken"
+        line: "community_string = STRONGPASSWORD"
+
+
+  handlers:
     - name: NCPA_CENTOS_6
       service:
         name: ncpa_listener
@@ -53,4 +75,9 @@
     - name: NCPA_CENTOS_7
       systemd:
         name: ncpa_listener
-        state: restarted  
+        state: restarted
+
+    - name: NCPA_AMAZON
+      systemd:
+        name: ncpa_listener
+        state: restarted

@@ -23,7 +23,7 @@
             state: restarted
 
         - name: Get key
-          shell: "r1soft-setup --get-key http://35.222.1.98"
+          shell: "r1soft-setup --get-key http://34.94.148.127"
         when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
 
    
@@ -47,7 +47,7 @@
             state: restarted
           notify: R1SOFT_INSTALLED_ON_CENTOS6 
         - name: Get key
-          shell: "r1soft-setup --get-key http://35.222.1.98"
+          shell: "r1soft-setup --get-key http://34.94.148.127"
         when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "6"
         
 

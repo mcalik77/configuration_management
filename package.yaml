@@ -4,6 +4,6 @@
     - name: Install 1 package
       package:
         name: httpd
-        state: latest
+        state: present
       become: yes
       become_method: sudo

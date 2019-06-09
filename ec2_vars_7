@@ -2,6 +2,6 @@ key_name: "awxTowerkey"
 instance_type: "t2.micro"
 image: "ami-eab3a90fc693af19"
 count: "3"
-vpc_subnet_id: "subnet-02a1a76a"
+vpc_subnet_id: "subnet-132b9f69"
 region: "eu-west-2"
 

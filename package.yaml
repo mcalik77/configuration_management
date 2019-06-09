@@ -1,5 +1,6 @@
 ---
-- hosts: all
+- name: install 1 package
+  hosts: all
   tasks:
     - name: Install 1 package
       package:

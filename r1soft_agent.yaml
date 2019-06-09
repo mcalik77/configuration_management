@@ -1,6 +1,6 @@
 ---
   - name: install r1soft agent
-    hosts: target
+    hosts: all
     become: yes
     become_method: sudo
     tasks: 
@@ -14,7 +14,7 @@
         - name: Install r1soft pgent
           package: 
             name: serverbackup-enterprise-agent 
-            state: latest 
+            state: present 
           notify: R1SOFT_INSTALLED_ON_CENTOS_7
 
         - name: start agent
@@ -40,7 +40,7 @@
         - name: Install r1soft pgent
           package: 
             name: serverbackup-enterprise-agent 
-            state: latest 
+            state: present
         - name: start agent
           service: 
             name: cdp-agent

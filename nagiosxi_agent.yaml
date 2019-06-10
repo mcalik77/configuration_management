@@ -6,13 +6,17 @@
   tasks: 
     - block:
       - name: Create Repo on Centos6
-        shell: "rpm -Uvh http://repo.nagios.com/nagios/6/nagios-repo-6-3.el6.noarch.rpm"
+        package:
+          name: "http://repo.nagios.com/nagios/7/nagios-repo-7-3.el7.noarch.rpm"
+          state: present
+        notify: NCPA_CENTOS_7
     
       - name: Install ncpa on centos 6
         package:
           name: ncpa
           state: present
         notify: NCPA_CENTOS_6
+
       - name: Change the code inside ncpa.cfg 
         lineinfile:
           path: /usr/local/ncpa/etc/ncpa.cfg
@@ -22,7 +26,10 @@
     
     - block:
       - name: Create repo on centos 7 
-        shell: "rpm -Uvh http://repo.nagios.com/nagios/7/nagios-repo-7-3.el7.noarch.rpm"
+        package:
+          name: "http://repo.nagios.com/nagios/7/nagios-repo-7-3.el7.noarch.rpm"
+          state: present
+        notify: NCPA_CENTOS_7
 
       - name: Install ncpa on centos 7
         package:
@@ -39,7 +46,9 @@
 
     - block:
       - name: Create repo on Amazon
-        shell: "rpm -Uvh http://repo.nagios.com/nagios/7/nagios-repo-7-3.el7.noarch.rpm"
+        package:
+          name: "http://repo.nagios.com/nagios/7/nagios-repo-7-3.el7.noarch.rpm"
+          state: present
 
       - name: Install ncpa on centos 7
         package:

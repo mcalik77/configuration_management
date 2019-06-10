@@ -1,4 +1,4 @@
----
+--- # Installing r1soft agent to Centos 6-7
   - name: install r1soft agent
     hosts: all
     become: yes

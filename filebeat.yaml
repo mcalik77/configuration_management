@@ -1,4 +1,4 @@
----
+--- # Installing filebeat on agent Centos 6-7
 - name: Install filebeat
   hosts: all
   become: yes

@@ -1,6 +1,6 @@
 --- 
 - name: create ec2 instance
-  host: localhost
+  hosts: localhost
   tasks:
    - name: Create instance
      ec2:

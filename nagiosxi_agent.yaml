@@ -1,4 +1,4 @@
----
+--- # Installing nagiosxi agent on CentOS 6 -7 and Amazon ami
 - name: Installs ncpa agent on instances
   hosts: all
   become: yes

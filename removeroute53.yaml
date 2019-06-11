@@ -1,0 +1,14 @@
+---
+- name: Add new.blueskysilkart.com as an A record with 1 ips
+  hosts: localhost
+  become: yes
+  become_method: sudo
+  tasks:
+    - route53:
+        state: absent
+        zone: blueskysilkart.com
+        record: new.blueskysilkart.com
+        type: A
+        ttl: 7200
+        value: 18.220.36.80
+        wait: yes

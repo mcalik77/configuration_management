@@ -1,0 +1,8 @@
+---
+- name: Delete an s3 bcuket
+  hosts: localhost 
+  tasks:
+    - name: Delete an s3 bucket
+      aws_s3:
+        bucket: "{{bucketname}}"
+        mode: delete

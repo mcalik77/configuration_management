@@ -1,0 +1,20 @@
+--- #sudo pip install boto
+- name: Creates ec2 instances
+  hosts: localhost
+  tasks:
+    - name: Create instances
+      ec2:
+        key_name: user_ANSIBLE_TOWER      
+        instance_type: t2.micro
+        image: ami-0f2b4fc905b0bd1f1
+        count: 3
+        vpc_subnet_id: subnet-b22b54c8
+        region: us-east-2
+        wait: yes
+        assign_public_ip: yes
+        user_data:
+                  #!/bin/sh
+                  sudo yum install httpd php70 -y
+                  service httpd start
+                  chkconfig httpd on
+                  

@@ -1,0 +1,13 @@
+---
+- name: create s3 bucket
+  hosts: localhost
+  vars_files:
+   - bucketCreds #name of the variables file
+  tasks: 
+    - name: create an S3 bucket
+      aws_s3:       #s3 bucket module in ansible
+       aws_access_key: "{{ access_key }}"  #your IAM access key
+       aws_secret_key: "{{ secret_key }}"  #your IAM secret key
+       bucket: "{{ bucketname }}"   #unique bucket name
+       mode: create #there are create, delete, put, get, and others
+       permission: public-read #bucket permission, default is private

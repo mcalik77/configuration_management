@@ -1,19 +1,17 @@
+---
+# tasks file for r1soft
 - block:
-  - name: Create Repository
-    copy: 
-      src: r1soft.repo
-      dest: /etc/yum.repos.d/r1soft.repo
+    - name: create repository 
+      copy: 
+        src: r1soft.repo
+        dest: /etc/yum.repos.d/r1soft.repo
+        
+    - name: install r1soft agent
+      package: 
+        name: serverbackup-enterprise-agent
+        state: latest 
+      notify: R1SOFT_INSTALLED_ON_CENTOS7
 
-  - name: Install r1soft pgent
-    package: 
-      name: serverbackup-enterprise-agent 
-      state: present
-
-  
-  - name: Get key
-    shell: "r1soft-setup --get-key http://18.220.36.80"
-    when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
-
-   
-
-
+    - name: get key
+      shell: "r1soft-setup --get-key http://r1soft.acirrustech.com"
+      when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"

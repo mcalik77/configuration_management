@@ -1,9 +1,11 @@
 ---
 # tasks file for wordpress
 - name: Install necessary packages
+  become: yes
+  become_method: sudo
   package: 
-    name: "{{items}}"
-    state: present
+    name: "{{item}}"
+    state: latest
   with_items:
     - wget
     - unzip

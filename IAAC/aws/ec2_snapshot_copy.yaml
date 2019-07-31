@@ -10,3 +10,32 @@
         volume_id: "{{volume_id}}"                               #volume ID of CentOS7 Machine.
         region: "{{region}}"                                  #name of region where my volume is located.
         description: "{{description}}"         # giving description or naming convention for my snapshot
+    - name: create a image from snapshot
+      ec2_ami:
+        name: image of snapshot
+        state: present
+        root_device_name: /dev/xvda
+        device_mapping:
+        - device_name: /dev/xvda
+          volume_size: 8
+          snapshot_id: "{{snapshotid}}"
+          delete_on_termination: true
+          volume_type: gp2
+
+    - name: copy ami to one region to another
+      ec2_ami_copy:
+        source_region: "{{source_region}}"
+        region: "{{destination_region}}"
+        source_image_id: "{{source_image_id}}"
+        wait: yes
+        wait_timeout: 1200  # Default timeout is 600
+        register: "{{new_image_id}}"
+     
+    - name: Create instance
+      ec2:
+        key_name: "{{key_name}}"
+        instance_type: "{{instance_type}}" 
+        image: "{{new_image_id}}"
+        count: "{{count}}"
+        vpc_subnet_id: "{{vpc_subnet_id}}"
+        region: "{{destination_region}}"

@@ -10,6 +10,7 @@
         volume_id: "{{volume_id}}"                               #volume ID of CentOS7 Machine.
         region: "{{region}}"                                  #name of region where my volume is located.
         description: "{{description}}"         # giving description or naming convention for my snapshot
+        
     - name: create a image from snapshot
       ec2_ami:
         name: image of snapshot

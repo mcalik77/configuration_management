@@ -7,6 +7,12 @@
     - name: create a snapshot on exisitng volume
       local_action:
         module: ec2_snapshot
-        volume_id: "{{volume_id}}"                               #volume ID of CentOS7 Machine.
-        region: "{{region}}"                                  #name of region where my volume is located.
-        description: "{{description}}"         # giving description or naming convention for my snapshot
+        instance_id: i-0096eb112fd43bd0d
+        device_name: /dev/sda1                            #volume ID of CentOS7 Machine.
+        region: us-east-1                                #name of region where my volume is located.
+        description: snapshot of dev instance 
+        snapshot_tags:
+          frequency: daily
+          source: /data # giving description or naming convention for my snapshot
+        
+        

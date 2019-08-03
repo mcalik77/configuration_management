@@ -3,16 +3,16 @@
   become: yes
   become_user: root
   tasks:
-    - name: Gathering the facts...
+    - name: Find snapshots.
       ec2_snapshot_facts:
-        region: us-east-1
         filters:
-          "tag:Name": [QA,Prod,Dev]
-      register: ec2_snaphot_facts
-      
+        "tag:Name": [QA,Prod,Dev]
+      register: ec2_snapshot_facts
+
+    - name: Print snapshot facts
       debug:
         msg: "{{ ec2_snapshot_facts }}"
-      
+
    
   
   

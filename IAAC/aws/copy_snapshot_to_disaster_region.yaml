@@ -30,6 +30,6 @@
         tags: "{{item.tag}}"
       
       with_items: 
-        - { snap_id: 'ec2_facts1.snapshot_id' tag: '{"Name":"Prod"}' }
-        - { snap_id: 'ec2_facts2.snapshot_id', tag: '{"Name":"Dev"}' }
-        - { snap_id: 'ec2_facts3.snapshot_id', tag: '{"Name":"QA"}' }
+        - { snap_id: 'ec2_facts1.snapshot_id()' tag: '{"Name":"Prod"}' }
+        - { snap_id: 'ec2_facts2.snapshot_id()', tag: '{"Name":"Dev"}' }
+        - { snap_id: 'ec2_facts3.snapshot_id()', tag: '{"Name":"QA"}' }

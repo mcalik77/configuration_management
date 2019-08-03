@@ -10,15 +10,15 @@
     - ec2_snapshot_copy:
         source_region: us-east-1
         region: us-east-2
-        source_snapshot_id: '{{snap_id}}"  #"{{item.snapshot_id}}"
+        source_snapshot_id: "{{item}}"  #"{{item.snapshot_id}}"
         #description: "disaster  recovery"
         #tags: '{"Name":"Dev"}' 
         wait: yes
         wait_timeout: 1200   # Default timeout is 600
-      with_items: "{{ snap_id }}"
-      - snap-012c2d75275874120
-      - snap-0416a2cb800a35978
-      - snap-091768dbb8c8e7512
+      with_items: 
+        - snap-012c2d75275874120
+        - snap-0416a2cb800a35978
+        - snap-091768dbb8c8e7512
   
   
       

@@ -15,7 +15,7 @@
         source_snapshot_id: "{{item}}"
         wait: yes
         wait_timeout: 1200   # Default timeout is 600
-      with_items: "{{ ec2_facts |json_query('snapshot_id')}}"
+      with_items: "{{ ec2_facts |json_query('snapshot_ids')}}"
   
   
       

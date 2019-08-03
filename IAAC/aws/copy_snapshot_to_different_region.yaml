@@ -11,8 +11,8 @@
         source_region: us-east-1
         region: us-east-2
         source_snapshot_id: '{{snap_id}}"  #"{{item.snapshot_id}}"
-        description: "disaster  recovery"
-        tags: '{"Name":"Dev"}' 
+        #description: "disaster  recovery"
+        #tags: '{"Name":"Dev"}' 
         wait: yes
         wait_timeout: 1200   # Default timeout is 600
       with_items: "{{ snap_id }}"

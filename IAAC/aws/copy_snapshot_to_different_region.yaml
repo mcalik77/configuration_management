@@ -12,11 +12,8 @@
         region: us-east-2
         source_snapshot_id: "{{item}}"  #"{{item.snapshot_id}}"
         description: "disaster  recovery"
-        tags: "{tags}"
-      with_items: "{{tags}}"
-        - '{ "Name":"Prod" }'
-        - '{ "Name":"Dev" }'
-        - '{ "Name":"QA" }'
+        tags: '{"Name":"Prod","Name":"Dev","Name":"QA"}'
+      
       with_items: 
         - snap-012c2d75275874120
         - snap-0416a2cb800a35978

@@ -1,0 +1,35 @@
+---
+- hosts: localhost
+  become: yes
+  become_user: root
+  tasks:
+    - name: Find snapshots.
+      ec2_snapshot_facts:
+        region: us-east-1
+        filters:
+          "tag:Name": Prod
+      register: ec2_facts1
+      
+      ec2_snapshot_facts:
+        region: us-east-1
+        filters:
+          "tag:Name": Dev
+      register: ec2_facts2
+      
+      ec2_snapshot_facts:
+        region: us-east-1
+        filters:
+          "tag:Name": QA
+      register: ec2_facts3
+      
+    - ec2_snapshot_copy:
+        source_region: us-east-1
+        region: us-east-2
+        source_snapshot_id: "{{item.snap_id}}"  #"{{item.snapshot_id}}"
+        description: "disaster  recovery"
+        tags: "{{item.tag}}"
+      
+      with_items: 
+        - { snap_id: 'ec2_facts1.snapshot_id' tag: '{"Name":"Prod"}' }
+        - { snap_id: 'ec2_facts2.snapshot_id', tag: '{"Name":"Dev"}' }
+        - { snap_id: 'ec2_facts3.snapshot_id', tag: '{"Name":"QA"}' }

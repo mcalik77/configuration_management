@@ -23,7 +23,7 @@
         wait: yes
         wait_timeout: 1200   # Default timeout is 600
       register: snapshot_id
-      with_items: "{{ ec2_facts | json_query('instances[].block_device_mapping[]'| jq '.Snapshots[] | select(.StartTime < "'$(date --date='-1 month' '+%Y-%m-%d')'") | [.Description, .StartTime, .SnapshotId]') }}"
+      with_items: "{{ ec2_facts | json_query('instances[].block_device_mapping[]'| json_query( 'SnapshotId[]') }}"
       - 
   
   

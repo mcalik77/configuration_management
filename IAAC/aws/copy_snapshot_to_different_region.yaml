@@ -8,13 +8,14 @@
         region: us-east-1
         filters:
         "tag:Name": [QA,Prod,Dev]
-      register: ec2_snapshot_facts
-
-    - name: Print snapshot facts
-      debug:
-        msg: "{{ snapshot_ids }}"
-
-   
+      register: ec2_facts
+    - ec2_snapshot_copy:
+        source_region: us-east-1
+        region: us-east-2
+        source_snapshot_id: "{{item}}"
+        wait: yes
+        wait_timeout: 1200   # Default timeout is 600
+      with_items: "{{ ec2_facts |json_query('snapshot_id')}}"
   
   
       

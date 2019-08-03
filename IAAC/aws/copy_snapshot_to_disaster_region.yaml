@@ -30,6 +30,6 @@
         tags: "{{item.tag}}"
       
       with_items: 
-        - { snap_id: 'ec2_facts1|json_query(snapshot_id)', tag: '{"Name":"Prod"}' }
-        - { snap_id: 'ec2_facts2|json_query(snapshot_id)', tag: '{"Name":"Dev"}' }
-        - { snap_id: 'ec2_facts3|json_query(snapshot_id)', tag: '{"Name":"QA"}' }
+        - { snap_id: 'ec2_facts1|json_query(SnapshotId)', tag: '{"Name":"Prod"}' }
+        - { snap_id: 'ec2_facts2|json_query(SnapshotId)', tag: '{"Name":"Dev"}' }
+        - { snap_id: 'ec2_facts3|json_query(SnapshotId)', tag: '{"Name":"QA"}' }

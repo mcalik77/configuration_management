@@ -3,14 +3,23 @@
   become: yes
   become_user: root
   tasks:
+    - name: Gathering the facts...
+      ec2_snapshot_facts:
+        region: us-east-1
+        filters:
+          "tag:Name": [QA,Prod,Dev]
+      register: ec2_snapshot_facts
     - name: Copying snapshot to different region
       ec2_snapshot_copy:
         source_region: us-east-1
         region: us-east-2
-        source_snapshot_id: "{{item.SnapshotId}}"
+        source_snapshot_id: "{{item.snapshot_id}}"
         wait: yes
         wait_timeout: 1200   # Default timeout is 600
       register: snapshot_id
-      with_items: "{{ $ aws ec2 describe-snapshots --owner self | jq '.Snapshots[] | select(.StartTime < "'$(date --date='-1 month' '+%Y-%m-%d')'") | [.Description, .StartTime, .SnapshotId]') }}"
+      with_items: "{{ ec2_snapshot_facts | json_query('instances[].block_device_mapping[]') }}"
       
+    
+  
+  
       

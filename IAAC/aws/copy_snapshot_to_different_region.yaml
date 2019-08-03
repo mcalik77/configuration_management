@@ -5,6 +5,7 @@
   tasks:
     - name: Gathering the facts...
       ec2_snapshot_facts:
+        region: us-east-1
       register: ec2_snaphot_facts
       
     - name: Snapshoting the instance... 

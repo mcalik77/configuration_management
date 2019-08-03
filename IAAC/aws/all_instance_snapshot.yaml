@@ -16,6 +16,16 @@
       ec2_snapshot:
         region: us-east-1
         volume_id: "{{ item.volume_id }}"
-      with_items: "{{ ec2_facts | json_query('instances[].block_device_mapping[]') }}"
+      ec2_snapshot_copy:
+        source_region: us-east-1
+        region: us-east-2
+        source_snapshot_id: "{{item.SnapshotId}}"
+        wait: yes
+        wait_timeout: 1200   # Default timeout is 600
+      register: snapshot_id
+      with_items: "{{ ec2_facts | json_query('instances[].block_device_mapping[]'| jq '.Snapshots[] | select(.StartTime < "'$(date --date='-1 month' '+%Y-%m-%d')'") | [.Description, .StartTime, .SnapshotId]') }}"
+      - 
+  
+  
       
       

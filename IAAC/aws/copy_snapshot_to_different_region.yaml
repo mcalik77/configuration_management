@@ -6,17 +6,17 @@
     - name: Gathering the facts...
       ec2_snapshot_facts:
         region: us-east-1
+        filters:
+          "tag:Name": [QA,Prod,Dev]
       register: ec2_snaphot_facts
       
-    - name: Snapshoting the instance... 
-      ec2_snapshot_copy:
+    - ec2_snapshot_copy:
         source_region: us-east-1
         region: us-east-2
         source_snapshot_id: "{{item.snapshot_id}}"
         wait: yes
         wait_timeout: 1200   # Default timeout is 600
       with_items: "{{ ec2_snaphot_facts | json_query('snapshot_id[]') }}"
-      
     
   
   

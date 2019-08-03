@@ -1,0 +1,18 @@
+---
+- hosts: localhost
+  become: yes
+  become_user: root
+  tasks:
+    - name: Gathering the facts...
+      ec2_remote_facts:
+        region: us-east-1
+      register: ec2_facts
+
+    - ec2_ami:
+          name: Developer environment 
+          state: present
+          device_mapping:
+            snapshot_id: "{{item.snapshotID}}"
+            delete_on_termination: true
+            volume_type: gp2
+      with_items: "{{ ec2_facts | json_query('instances[].block_device_mapping[]') }}"

@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Gathering the facts...
+      ec2_remote_facts:
+        region: us-east-1
+      register: ec2_facts
+
+    - name: Snapshoting the instance...
+      ec2_snapshot:
+        region: us-east-1
+        volume_id: "{{ item.volume_id }}"
+      with_items: "{{ ec2_facts | json_query('instances[].block_device_mapping[]') }}"

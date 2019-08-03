@@ -14,7 +14,9 @@
         description: "disaster  recovery"
         tags: "{tags}"
       with_items: "{{tags}}"
-        - {"Name":"Prod","Name":"Dev","Name":"QA"}
+        - "Name":"Prod"
+        - "Name":"Dev"
+        - "Name":"QA"
       with_items: 
         - snap-012c2d75275874120
         - snap-0416a2cb800a35978

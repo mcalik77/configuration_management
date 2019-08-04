@@ -6,7 +6,7 @@
     
     - name: Find snapshots.
       ec2_snapshot_facts:
-        region: "us-east-1"
+        region: us-east-1
         filters:
           status: completed
           "tag:Name": ["Prod", "QA", "Dev"]

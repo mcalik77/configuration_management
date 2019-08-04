@@ -12,7 +12,8 @@
           "tag:Name": ["Prod", "QA", "Dev"]
       register: ec2_facts
  
-    - ec2_snapshot_copy:
+    - name: Snapshot copy to another region
+      ec2_snapshot_copy:
          source_region: us-east-1
          region: us-east-2
          source_snapshot_id: "{{item.snapshot_id}}"  #"{{item.snapshot_id}}"

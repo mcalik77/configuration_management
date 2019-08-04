@@ -12,7 +12,7 @@
           "tag:Name": ["Prod","QA","Dev"]
       register: ec2_facts
     - debug:
-        msg: "{{ ec2_facts }}"
+        msg: "{{ ec2_facts | json_query('snapshots[].snapshot_id')}}"
     
        
 

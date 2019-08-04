@@ -7,19 +7,19 @@
       ec2_snapshot_facts:
         region: us-east-1
         filters:
-          "tag:Name": Prod
+          "tag:Name": "Prod"
       register: ec2_facts1
       
       ec2_snapshot_facts:
         region: us-east-1
-        filters:
-          "tag:Name": Dev
+        
+         
       register: ec2_facts2
       
       ec2_snapshot_facts:
         region: us-east-1
         filters:
-          "tag:Name": QA
+          "tag:Name": "QA"
       register: ec2_facts3
       
     - debug: var=ec2_facts1.stdout_lines

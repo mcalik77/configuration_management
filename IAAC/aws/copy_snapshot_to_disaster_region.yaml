@@ -11,7 +11,7 @@
       
     
     - debug:
-        msg: "{{ec2_facts1}}"
+        msg: "{{ec2_facts1.snapshots.snapshot_id}}"
     
    # - ec2_snapshot_copy:
    #    source_region: us-east-1

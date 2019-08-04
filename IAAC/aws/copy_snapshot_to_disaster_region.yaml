@@ -3,13 +3,14 @@
   become: yes
   become_user: root
   tasks:
-    - name: Find snapshots.
+    - name: Gathering the facts
       ec2_remote_facts:
         region: us-east-1
         filters:
           "tag:Name": [QA,Prod,Dev]
       register: ec2_facts
-      
+    
+    - name: Find snapshots.
       ec2_snapshot_facts:
         region: us-east-1
         filters:
@@ -37,6 +38,7 @@
    #    source_region: us-east-1
    #   region: us-east-2
    #    source_snapshot_id: "{{item.snap_id}}"  #"{{item.snapshot_id}}"
+   
    #     description: "disaster  recovery"
    #     tags: "{{item.tag}}"
       

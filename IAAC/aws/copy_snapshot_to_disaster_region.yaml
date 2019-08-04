@@ -11,8 +11,6 @@
           status: completed
           "tag:Name": Prod
       register: ec2_facts_prod
-    - debug:
-        msg: "{{ ec2_facts_prod | json_query('snapshots[].snapshot_id')}}"
     
     - name: Find snapshots of qa
       ec2_snapshot_facts:
@@ -21,8 +19,27 @@
           status: completed
           "tag:Name": QA
       register: ec2_facts_qa
-    - debug:
-        msg: "{{ ec2_facts_qa | json_query('snapshots[].snapshot_id')}}"
+      
+    - name: Find snapshots of dev
+      ec2_snapshot_facts:
+        region: "us-east-1"
+        filters:
+          status: completed
+          "tag:Name": Dev
+      register: ec2_facts_dev
+    
+        
+    - name: Snapshot copy to another region
+      ec2_snapshot_copy:
+        source_region: us-east-1
+        region: us-east-2
+        description: "disaster  recovery"
+        source_snapshot_id: "{{item.snapid)}} #"{{item.snapshot_id}}"
+        tags: "{{item.tag}}"
+      with_items:
+        - {snapid: "{{ ec2_facts_prod | json_query('snapshots[].snapshot_id')}}", tag: "Prod"}
+        - {snapid: "{{ ec2_facts_qa | json_query('snapshots[].snapshot_id')}}", tag: "QA"}
+        - {snapid: "{{ ec2_facts_dev | json_query('snapshots[].snapshot_id')}}", tag: "Dev"}
         
       
 

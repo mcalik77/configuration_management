@@ -19,8 +19,8 @@
         region: us-east-2
         source_snapshot_id: "{{item}}"  #"{{item.snapshot_id}}"
         description: "disaster  recovery"
-        tags: ["Prod","QA","Dev"]
-      
+        tags: "{{item.snaptag}}"
+      with_items: "{{snaptag:"Prod","QA","Dev"}}"
       with_items: "{{ ec2_facts | json_query('snapshots[].snapshot_id')}}"
         
        

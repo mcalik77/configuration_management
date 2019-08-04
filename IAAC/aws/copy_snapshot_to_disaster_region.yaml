@@ -12,21 +12,6 @@
           "tag:Name": ["Prod","QA","Dev"]
       register: ec2_facts
     - debug:
-        msg: "{{ ec2_facts | json_query('snapshots[].snapshot_id')}}"
-    - name: Snapshot copy to another region
-      ec2_snapshot_copy:
-        source_region: us-east-1
-        region: us-east-2
-        source_snapshot_id: "{{item}}"  #"{{item.snapshot_id}}"
-      with_items: "{{ ec2_facts | json_query('snapshots[].snapshot_id')}}"
-        
-        description: "disaster  recovery"
-        tags: "{{item.snaptag}}"
-      with_items: 
-        - {snaptag:Prod}
-        - {snaptag:QA}
-        - {snaptag:Dev}
-      
-        
-       
+        msg: "{{ ec2_facts | json_query('snapshots["tag:Name":"Prod"].snapshot_id')}}"
+    
 

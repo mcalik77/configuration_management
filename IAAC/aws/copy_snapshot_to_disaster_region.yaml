@@ -7,7 +7,7 @@
       ec2_snapshot_facts:
         region: us-east-1
         filters:
-          "tag:Name": "Prod"
+          status: completed
       register: ec2_facts1
       
       ec2_snapshot_facts:
@@ -41,3 +41,6 @@
         
         
        
+- ec2_snapshot_facts:
+    filters:
+      status: error

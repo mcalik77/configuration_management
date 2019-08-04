@@ -34,7 +34,7 @@
         source_region: us-east-1
         region: us-east-2
         description: "disaster  recovery"
-        source_snapshot_id: "{{item.snapid)}} #"{{item.snapshot_id}}"
+        source_snapshot_id: "{{item.snapid)}}"
         tags: "{{item.tag}}"
       with_items:
         - {snapid: "{{ ec2_facts_prod | json_query('snapshots[].snapshot_id')}}", tag: "Prod"}

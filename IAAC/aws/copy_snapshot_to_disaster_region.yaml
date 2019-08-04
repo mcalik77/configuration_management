@@ -6,14 +6,14 @@
     
     - name: Find snapshots.
       ec2_snapshot_facts:
-        region: us-east-1
+        region: "us-east-1"
         filters:
           status: completed
           "tag:Name": ["Prod", "QA", "Dev"]
       register: ec2_facts
 
     - name: Snapshot copy to another region
-      ec2_snapshot_copy
+      ec2_snapshot_copy:
         source_region: us-east-1
         region: us-east-2
         source_snapshot_id: "{{item.snapshot_id}}"  #"{{item.snapshot_id}}"

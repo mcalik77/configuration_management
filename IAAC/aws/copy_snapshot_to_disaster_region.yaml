@@ -13,14 +13,9 @@
     - name: Find snapshots.
       ec2_snapshot_facts:
         region: "us-east-1"
-        filters:
-          status: completed
       register: ec2_facts1
       
       ec2_snapshot_facts:
-        region: "us-east-1"
-        
-         
       register: ec2_facts2
       
       ec2_snapshot_facts:
@@ -33,9 +28,8 @@
         msg: "{{ec2_facts}}"
     - debug:
         msg: "{{ec2_facts1}}"
-    - debug: 
+    - debug:
         msg: "{{ec2_facts2}}"
-    - debug: var=ec2_facts3.stdout_lines
       
    # - ec2_snapshot_copy:
    #    source_region: us-east-1

@@ -41,6 +41,4 @@
         
         
        
-- ec2_snapshot_facts:
-    filters:
-      status: error
+

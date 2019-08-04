@@ -9,26 +9,37 @@
         region: "us-east-1"
         filters:
           status: completed
-          "tag:Name": ["Prod","QA","Dev"]
+          "tag:Name": Prod
       register: ec2_facts1
       
-    
-    - debug:
-        msg: "{{ec2_facts1 | json_query('snapshots[].snapshot_id')}}"
-    
-   # - ec2_snapshot_copy:
-   #    source_region: us-east-1
-   #   region: us-east-2
-   #    source_snapshot_id: "{{item.snap_id}}"  #"{{item.snapshot_id}}"
-   
-   #     description: "disaster  recovery"
-   #     tags: "{{item.tag}}"
+      ec2_snapshot_facts:
+        region: "us-east-1"
+        filters:
+          status: completed
+          "tag:Name": Dev
+      register: ec2_facts2
       
-   #   with_items: 
-   #     - { snap_id: 'ec2_facts1 | json_query('snapshot[].snapshot_id')', tag: '{"Name":"Prod"}' }
-   #     - { snap_id: 'ec2_facts2 | json_query('snapshot[].snapshot_id')', tag: '{"Name":"Dev"}' }
-   #      - { snap_id: 'ec2_facts3 | json_query('snapshot[].snapshot_id')', tag: '{"Name":"QA"}' }
-        
+      ec2_snapshot_facts:
+        region: "us-east-1"
+        filters:
+          status: completed
+          "tag:Name": QA
+      register: ec2_facts3
+    
+    
+    
+    - ec2_snapshot_copy:
+         source_region: us-east-1
+         region: us-east-2
+         source_snapshot_id: "{{item.snap_id}}"  #"{{item.snapshot_id}}"
+   
+         description: "disaster  recovery"
+         tags: "{{item.tag}}"
+      
+      with_items: 
+        - { snap_id: 'ec2_facts1 | json_query('snapshots[].snapshot_id')', tag: '{"Name":"Prod"}' }
+        - { snap_id: 'ec2_facts2 | json_query('snapshots[].snapshot_id')', tag: '{"Name":"Dev"}' }
+        - { snap_id: 'ec2_facts3 | json_query('snapshots[].snapshot_id')', tag: '{"Name":"QA"}' }
         
         
        

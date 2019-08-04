@@ -20,7 +20,7 @@
       register: ec2_facts_qa
       
     - debug:
-        msg: "{{ ec2_facts_prod | json_query('snapshots[].snapshot_id(0)')}}"
+        msg: "{{ ec2_facts_prod | json_query('snapshots[].snapshot_id')}}"
         msg: "{{ ec2_facts_qa | json_query('snapshots[].snapshot_id')}}"
         
     

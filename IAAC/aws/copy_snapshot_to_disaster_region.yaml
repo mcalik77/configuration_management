@@ -9,9 +9,19 @@
         region: "us-east-1"
         filters:
           status: completed
-          "tag:Name": ["Prod","QA","Dev"]
-      register: ec2_facts
+          "tag:Name": Prod
+      register: ec2_facts_prod
+      
+      ec2_snapshot_facts:
+        region: "us-east-1"
+        filters:
+          status: completed
+          "tag:Name": QA
+      register: ec2_facts_qa
+      
     - debug:
-        msg: "{{ ec2_facts | json_query('snapshots["tag:Name":"Prod"].snapshot_id')}}"
+        msg: "{{ ec2_facts_prod | json_query('snapshots[].snapshot_id(0)')}}"
+        msg: "{{ ec2_facts_qa | json_query('snapshots[].snapshot_id')}}"
+        
     
 

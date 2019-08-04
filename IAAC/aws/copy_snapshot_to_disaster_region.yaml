@@ -15,12 +15,12 @@
     - ec2_snapshot_copy:
          source_region: us-east-1
          region: us-east-2
-         source_snapshot_id: "{{item}}"  #"{{item.snapshot_id}}"
+         source_snapshot_id: "{{item.snapshot_id}}"  #"{{item.snapshot_id}}"
    
          description: "disaster  recovery"
          #tags: "{{item.tag}}"
       
-      with_items: "{ec2_facts1 | json_query('snapshots[].snapshot_id')}"
+      with_items: "{ec2_facts1 | json_query('snapshots[]')}"
         
         
        

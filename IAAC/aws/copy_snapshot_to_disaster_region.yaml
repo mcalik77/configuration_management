@@ -32,8 +32,9 @@
     - debug: 
         msg: "{{ec2_facts}}"
     - debug:
-        msg: "{{ec2_facts1.snapshot_id}}"
-    - debug: var=ec2_facts2.stdout_lines
+        msg: "{{ec2_facts1}}"
+    - debug: 
+        msg: "{{ec2_facts2}}"
     - debug: var=ec2_facts3.stdout_lines
       
    # - ec2_snapshot_copy:

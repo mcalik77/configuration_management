@@ -9,6 +9,9 @@
         region: "us-east-1"
         filters:
           status: completed
+          "tag:Name": Prod
+          "tag:Name": QA
+          "tag:Name": Dev
       register: ec2_facts1
       
     

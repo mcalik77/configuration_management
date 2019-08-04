@@ -14,14 +14,5 @@
     - debug:
         msg: "{{ ec2_facts_prod | json_query('snapshots[].snapshot_id')}}"
         
-      ec2_snapshot_facts:
-        region: "us-east-1"
-        filters:
-          status: completed
-          "tag:Name": QA
-      register: ec2_facts_qa
-    - debug:
-        msg: "{{ ec2_facts_qa | json_query('snapshots[].snapshot_id')}}"
-        
-    
+      
 

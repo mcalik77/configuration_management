@@ -35,7 +35,7 @@
         region: us-east-2
         description: "disaster  recovery"
         source_snapshot_id: "{{item.snapid)}}"
-        tags: Name: ["Prod","QA", "Dev"
+        tags: "{{item.tag}}"
       with_items:
         - { snapid: 'ec2_facts_prod.snapshots[].snapshot_id', tag: '{"Name":"Prod"}' }
         - { snapid: 'ec2_facts_qa.snapshots[].snapshot_id', tag: '{"Name":"QA"}' }

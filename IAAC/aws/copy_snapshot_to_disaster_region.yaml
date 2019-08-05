@@ -27,6 +27,8 @@
           status: completed
           "tag:Name": Dev
       register: ec2_facts_dev
+    - debug:
+        msg:"{{ec2_facts_prod.snapshots[].snapshot_id(0)}}"
     
         
     - name: Snapshot copy to another region
@@ -37,9 +39,9 @@
         source_snapshot_id: "{{item.snapid)}}"
         tags: "{{item.tag}}"
       with_items:
-        - { snapid: '{{ec2_facts_prod.snapshots[].snapshot_id()}}', tag: '{"Name":"Prod"}' }
-        - { snapid: '{{ec2_facts_qa.snapshots[].snapshot_id()}}', tag: '{"Name":"QA"}' }
-        - { snapid: '{{ec2_facts_dev.snapshots[].snapshot_id()}}', tag: '{"Name":"Dev"}' }
+        - { snapid: '{{ec2_facts_prod.snapshots[].snapshot_id(0)}}', tag: '{"Name":"Prod"}' }
+        - { snapid: '{{ec2_facts_qa.snapshots[].snapshot_id(0)}}', tag: '{"Name":"QA"}' }
+        - { snapid: '{{ec2_facts_dev.snapshots[].snapshot_id(0)}}', tag: '{"Name":"Dev"}' }
         
         
        

@@ -37,9 +37,9 @@
         source_snapshot_id: "{{item.snapid)}}"
         tags: "{{item.tag}}"
       with_items:
-        - { snapid: 'ec2_facts_prod.snapshots[].snapshot_id', tag: '{"Name":"Prod"}' }
-        - { snapid: 'ec2_facts_qa.snapshots[].snapshot_id', tag: '{"Name":"QA"}' }
-        - { snapid: 'ec2_facts_dev.snapshots[].snapshot_id', tag: '{"Name":"Dev"}' }
+        - { snapid: '{{ec2_facts_prod.snapshots[].snapshot_id}}', tag: '{"Name":"Prod"}' }
+        - { snapid: '{{ec2_facts_qa.snapshots[].snapshot_id}}', tag: '{"Name":"QA"}' }
+        - { snapid: '{{ec2_facts_dev.snapshots[].snapshot_id}}', tag: '{"Name":"Dev"}' }
         
         
        

@@ -37,9 +37,9 @@
         source_snapshot_id: "{{item.snapid)}}"
         tags: "{{item.tag}}"
       with_items:
-        - {snapid: '{{ ec2_facts_prod | json_query('snapshots[].snapshot_id')}}', tag: '{"Name":"Prod"}'}
-        - {snapid: '{{ ec2_facts_qa | json_query('snapshots[].snapshot_id')}}', tag: '{"Name":"QA"}'}
-        - {snapid: '{{ ec2_facts_dev | json_query('snapshots[].snapshot_id')}}', tag: '{"Name":"Dev"}'}
+        - {snapid: {{ (ec2_facts_prod | json_query('snapshots[].snapshot_id'))}, tag: {"Name":"Prod"}}
+        #- {snapid: '{{ ec2_facts_qa | json_query('snapshots[].snapshot_id')}}', tag: '{"Name":"QA"}'}
+        #- {snapid: '{{ ec2_facts_dev | json_query('snapshots[].snapshot_id')}}', tag: '{"Name":"Dev"}'}
         
        
         

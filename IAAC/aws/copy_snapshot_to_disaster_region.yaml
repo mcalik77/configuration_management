@@ -4,46 +4,23 @@
   become_user: root
   tasks:
     
-    - name: Find snapshots of prod
+    - name: Find snapshots.
       ec2_snapshot_facts:
         region: "us-east-1"
         filters:
           status: completed
-          "tag:Name": Prod
-      register: ec2_facts_prod
-    
-    - name: Find snapshots of qa
-      ec2_snapshot_facts:
-        region: "us-east-1"
-        filters:
-          status: completed
-          "tag:Name": QA
-      register: ec2_facts_qa
-      
-    - name: Find snapshots of dev
-      ec2_snapshot_facts:
-        region: "us-east-1"
-        filters:
-          status: completed
-          "tag:Name": Dev
-      register: ec2_facts_dev
+          "tag:Name": ["Prod","QA","Dev"]
+      register: ec2_facts
     - debug:
-        msg:"{{ec2_facts_prod.snapshots[].snapshot_id(0)}}"
-    
-        
+        msg: "{{ ec2_facts | json_query('snapshots[].snapshot_id')}}"
     - name: Snapshot copy to another region
       ec2_snapshot_copy:
         source_region: us-east-1
         region: us-east-2
+        source_snapshot_id: "{{item.snapshot_id}}"  #"{{item.snapshot_id}}"
         description: "disaster  recovery"
-        source_snapshot_id: "{{item.snapid)}}"
         tags: "{{item.tag}}"
-      with_items:
-        - { snapid: '{{ec2_facts_prod.snapshots[].snapshot_id(0)}}', tag: '{"Name":"Prod"}' }
-        - { snapid: '{{ec2_facts_qa.snapshots[].snapshot_id(0)}}', tag: '{"Name":"QA"}' }
-        - { snapid: '{{ec2_facts_dev.snapshots[].snapshot_id(0)}}', tag: '{"Name":"Dev"}' }
-        
-        
+      with_items: "{{ ec2_facts | json_query('snapshots[]')}}"
        
         
       

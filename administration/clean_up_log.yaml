@@ -3,8 +3,7 @@
   become: true
   become_user: root
   hosts: localhost
-  name: "zips files older than 90 days"
+  name: "zips files older than 10 days"
   tasks: 
-    - 
-      name: "Zip /var/log"
-      shell: "find /var/log/ -type f -name  '\"*log*\"'  -mtime +0 -exec gzip -9 {} \\;"
+    - name: "Zip /var/log"
+      shell: "find /var/log/ -type f -name  '\"*log*\"'  -atime +10 -exec gzip {} \\;"

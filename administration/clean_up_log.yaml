@@ -1,6 +1,6 @@
 ---
 - name: zips files older than 90 days
-  hosts: all 
+  hosts: local 
   become: yes
   become_user: root
   tasks:

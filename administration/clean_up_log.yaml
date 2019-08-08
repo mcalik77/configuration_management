@@ -2,7 +2,7 @@
 - 
   become: true
   become_user: root
-  hosts: local
+  hosts: localhost
   name: "zips files older than 90 days"
   tasks: 
     - 

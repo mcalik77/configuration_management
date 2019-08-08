@@ -7,4 +7,4 @@
   tasks: 
     - 
       name: "Zip /var/log"
-      shell: "find -r /var/log/ -type f -name  '\"*log*\"'  -mtime +0 -exec gzip -9 {} \\;"
+      shell: "find /var/log/ -type f -name  '\"*log*\"'  -mtime +0 -exec gzip -9 {} \\;"

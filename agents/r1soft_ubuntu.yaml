@@ -13,7 +13,7 @@
         shell: "apt-get update"
 
       - name: Install r1soft agent
-        shell: "apt-get install r1soft-cdp-enterprise-agent"
+        shell: "apt-get install serverbackup-enterprise-agent"
 
       - name: start agent
         shell: "/etc/init.d/cdp-agent restart"

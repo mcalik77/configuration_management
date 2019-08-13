@@ -12,9 +12,10 @@
         shell: "apt-key add r1soft.asc"
         shell: "apt-get update"
 
-      - name: Install r1soft agent
-        shell: "apt-get install r1soft-cdp-enterprise-agent"
-
+      - name: Install apache httpd but avoid starting it immediately (state=present is optional)
+        apt:
+          name: r1soft-cdp-enterprise-agent
+          state: present
       - name: start agent
         shell: "/etc/init.d/cdp-agent restart"
         shell: "r1soft-setup --get-key http://r1soft.acirrustech.com"

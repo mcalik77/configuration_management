@@ -15,5 +15,5 @@
       
       - name: start agent
         shell: "/etc/init.d/cdp-agent restart"
-        shell: "r1soft-setup --get-key http://r1soft.acirrustech.com"
+        shell: "r1soft-setup --get-key http://r1soft.acirrustech.com:8080"
         

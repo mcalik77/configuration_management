@@ -15,7 +15,7 @@
       - name: Install r1soft agent
         package: 
           name: r1soft-cdp-enterprise-agent 
-        state: present 
+          state: present 
 
       - name: start agent
         shell: "/etc/init.d/cdp-agent restart"

@@ -7,7 +7,7 @@
     # This line is for CentOS 7
       - apt_repository:
           repo: deb http://repo.r1soft.com/apt stable main
-          state: presentname: Create Repository
+          state: present
       - name: get the repo 
         shell: "wget http://repo.r1soft.com/r1soft.asc"
         shell: "apt-key add r1soft.asc"

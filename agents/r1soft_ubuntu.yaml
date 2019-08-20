@@ -11,7 +11,9 @@
       - name: get the repo 
         shell: "wget http://repo.r1soft.com/r1soft.asc"
         shell: "apt-key add r1soft.asc"
-        shell: "apt-get update"
+      - name: Run the equivalent of "apt-get update" as a separate step
+        apt:
+          update_cache: yes
       - name: Install the package "r1soft agent"
         apt:
           name: r1soft-cdp-enterprise-agent
